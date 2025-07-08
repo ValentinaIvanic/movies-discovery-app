@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./componets/NavBar";
+import styled from "styled-components";
+import SideBar from "./componets/SideBar";
+import ContentGrid from "./componets/ContentList";
+
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  height: 100%;
+`;
+
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #101010;
+`;
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Page>
+      <NavBar/>
+      <MainDiv>
+        <SideBar/>
+        <ContentGrid/>
+      </MainDiv>
+    </Page>
+
   );
 }
 
