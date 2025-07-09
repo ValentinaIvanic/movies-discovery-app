@@ -1,13 +1,15 @@
 import styled from "styled-components"
+import NavLink from "./NavLink";
 
 const StyledNav = styled.nav`
     width: 100%;
-    min-height: 60px;
+    min-height: 4rem;
+    height: 5rem;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 32px;
+    padding: 0 5rem; 
     box-sizing: border-box;
     margin: 0;
 
@@ -18,6 +20,10 @@ const Logo = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 1px;
+
+    display: flex;
+    align-items: center;
+    height: 100%;
 `;
 
 const NavLinks = styled.div`
@@ -27,29 +33,15 @@ const NavLinks = styled.div`
     height: 100%;
 `;
 
-const StyledLinks = styled.a`
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    position: relative;
-    transition: color 0.2s;
-
-    &:hover {
-        color: yellow;
-        background: grey;
-    }
-`;
-
-
 
 export default function NavBar(){
     return (
         <StyledNav>
             <Logo>MOVIES ONLINE</Logo>
             <NavLinks>
-                <StyledLinks href="/">Home</StyledLinks>
-                <StyledLinks href="/">Movies</StyledLinks>
-                <StyledLinks href="/">Tv-shows</StyledLinks>
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/">Movies</NavLink>
+                <NavLink href="/">Tv-shows</NavLink>
             </NavLinks>
 
         </StyledNav>

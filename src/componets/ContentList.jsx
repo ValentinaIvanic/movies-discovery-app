@@ -9,7 +9,7 @@ const ContentBox = styled.div`
     color:white
 `;
 
-const ContentGenre = styled.text`
+const ContentGenre = styled.h6`
     font-size: x-small;
 `;
 
@@ -33,14 +33,10 @@ const Grid = styled.div`
 
 export default function ContentGrid() {
     const [content, setContent] = useState([]);
-    const baseImgUrl = "https://image.tmdb.org/t/p/original"
 
     const getStartData = async () => {
         try {
-            const res = await API.get(
-                "/discover/movie", 
-                {params: { include_video: 'false', sort_by: 'popularity.desc'}
-            });
+            const res = await API.get("/discover/movie", {params: { include_video: 'false', sort_by: 'popularity.desc'}});
             console.log(res.data.results);
             const data = res.data.results
             setContent(data);
@@ -59,7 +55,7 @@ export default function ContentGrid() {
             { content ? (
             content.map((item) =>
                 <ContentBox key={item.id}>
-                    <img src={baseImgUrl + item.poster_path} alt="Slika" />
+                    <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="Slika" />
                     <ContentGenre>{item.genre_ids}</ContentGenre>
                     <ContentTitle>{item.title}</ContentTitle>
                 </ContentBox>

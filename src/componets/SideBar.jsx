@@ -1,10 +1,11 @@
 import styled  from "styled-components";
 
 const SideBarContainer = styled.div`
-    max-width: 18%;
+    max-width: 20%;
+    min-width: max-content;
     display: flex;
     flex-direction: column;
-    padding: 5px 5px;
+    padding: 1rem 1rem;
     background: black;
     gap: 5px;
 
@@ -38,7 +39,7 @@ export default function SideBar() {
     return (
         <SideBarContainer>
             {genres.map(
-                (genre) => <Genre>{genre}</Genre>
+                (genre) => <Genre key={genre}>{genre}</Genre>
             )}
         </SideBarContainer>
     );
