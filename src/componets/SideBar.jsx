@@ -24,11 +24,6 @@ const Genre = styled.div`
     }
 `;
 
-const About = styled.div`
-
-`;
-
-
 export default function SideBar() {
     const genres = ["COMEDY", "DRAMA", "ACTION", "FANTASTIC", "ROMANTIC", 
                     "ANIME", "ADVENTURE", "THRILLER", "MYSTIC", "SCIENCE", 
