@@ -1,15 +1,8 @@
 import NavBar from "./componets/NavBar";
 import styled from "styled-components";
-import SideBar from "./componets/SideBar";
-import ContentGrid from "./componets/ContentList";
-
-const MainDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 20px;
-  height: 100%;
-`;
+import Home from "./pages/Home";
+import TvShows from "./pages/TvShows";
+import Movies from "./pages/Movies"
 
 const Page = styled.div`
   display: flex;
@@ -23,10 +16,7 @@ function App() {
   return (
     <Page>
       <NavBar/>
-      <MainDiv>
-        <SideBar/>
-        <ContentGrid/>
-      </MainDiv>
+      <Movies/>
     </Page>
 
   );

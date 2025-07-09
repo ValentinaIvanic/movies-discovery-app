@@ -20,6 +20,7 @@ const Title = styled.h4`
     font-size: small;
     display: flex;
     text-align: center;
+    justify-content: center;
     text-transform: capitalize;
     margin: 2px;
 
@@ -29,11 +30,11 @@ const Title = styled.h4`
     }
 `;
 
-export default function ContentBox({id, poster_path, genre_ids, title}) {
+export default function FeaturedBox({img_path, genre_ids, title}) {
 
     return(
-        <Box key={id}>
-            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="Slika" />
+        <Box>
+            <img src={`${img_path}`} alt="Slika" />
             <Genre>{genre_ids}</Genre>
             <Title>{title}</Title>
         </Box>

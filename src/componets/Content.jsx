@@ -1,24 +1,27 @@
 import styled from "styled-components";
-import Preview from "../componets/Preview";
+import SideBar from "../componets/SideBar";
 import FeaturedGrid from "../componets/Featured";
 import API from "../api";
+
 import { useState, useEffect } from "react";
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  height: 100%;
 `;
 
-export default function Home() {
+export default function Content({category, genres}) {
     const [content, setContent] = useState([]);
 
-    const getStartData = async () => {
+    const getData = async () => {
         try {
             const res = await API.get(
-                    "/discover/movie", 
-                    {params: { 
+                    `/discover/${category}`, 
+                    {params: {
+                        with_genres: genres,
                         include_video: 'false', 
                         sort_by: 'popularity.desc',
                     }}
@@ -32,19 +35,16 @@ export default function Home() {
     }
 
     useEffect(() => {
-        getStartData();
+        getData();
     }, []);
 
-    return(
-        <Wrapper> 
-            <Preview 
-                firstItem={content[0]}
-                otherItems={content.slice(1, 5)}
+    return (
+        <Wrapper>
+            <SideBar/>
+            <FeaturedGrid
+                items={content}
             />
-            <FeaturedGrid items={content}/>
         </Wrapper>
-
     );
-
 
 };
