@@ -12,6 +12,7 @@ const Genre = styled.h6`
     font-size: x-small;
     text-align: center;
     height: max-content;
+    text-transform: capitalize;
     margin: 3px;    
 `;
 
@@ -21,7 +22,7 @@ const Title = styled.h4`
     display: flex;
     text-align: center;
     justify-content: center;
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin: 2px;
 
     &:hover {

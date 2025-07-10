@@ -6,7 +6,7 @@ const Grid = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
     gap: 1rem;
     height: 50%;
-    margin: 8px;
+    padding: 10px 20px;
 `;
 
 export default function FeaturedGrid({items}) {

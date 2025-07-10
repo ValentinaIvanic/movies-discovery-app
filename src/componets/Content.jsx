@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import SideBar from "../componets/SideBar";
 import FeaturedGrid from "../componets/Featured";
 import API from "../api";
-
+import SideBar from "./SideBar";
 import { useState, useEffect } from "react";
 
 const Wrapper = styled.div`
@@ -40,7 +39,7 @@ export default function Content({category, genres}) {
 
     return (
         <Wrapper>
-            <SideBar/>
+            <SideBar category={category}/>
             <FeaturedGrid
                 items={content}
             />
