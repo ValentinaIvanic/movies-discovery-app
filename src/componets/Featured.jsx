@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import FeaturedBox from "./FeaturedBox";
+import LoadMoreButton from "./LoadMoreButton";
 
 const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
     gap: 1rem;
-    height: 50%;
     padding: 10px 20px;
 `;
 
-export default function FeaturedGrid({items}) {
-
+export default function Featured({items}) {
+    
     return (
         <Grid>
            { items?.map((item) =>
@@ -21,6 +21,7 @@ export default function FeaturedGrid({items}) {
                     title={item.title ? item.title : item.name}
                 />
             ) }
+            <LoadMoreButton/>
         </Grid>
     );
 

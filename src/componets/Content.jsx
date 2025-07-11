@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import FeaturedGrid from "../componets/Featured";
+import Featured from "../componets/Featured";
 import API from "../api";
 import SideBar from "./SideBar";
 
 import { useState, useEffect, createContext } from "react";
 
-export const GenresContext = createContext();
+export const AppContext = createContext({genres:[], setGenres:()=>{}, fetchPageNum:[], setFetchPageNum:()=>{}});
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,12 +18,18 @@ const Wrapper = styled.div`
 export default function Content({category}) {
     const [content, setContent] = useState([]);
     const [genres, setGenres] = useState([]);
+    const [fetchPageNum, setFetchPageNum] = useState(1);
+    const [firstRender, setFirstRender] = useState(true);
 
-    const getData = async () => {
+    const [nextContent, setNextContent] = useState([]);
+
+
+    const getStartData = async (pageNum) => {
         try {
             const res = await API.get(
                     `/discover/${category}`, 
                     {params: {
+                        page: pageNum,
                         with_genres: genres,
                         include_video: 'false', 
                         sort_by: 'popularity.desc',
@@ -37,18 +43,49 @@ export default function Content({category}) {
         }
     }
 
+    const getData = async (pageNum) => {
+        try {
+            const res = await API.get(
+                    `/discover/${category}`, 
+                    {params: {
+                        page: pageNum,
+                        with_genres: genres,
+                        include_video: 'false', 
+                        sort_by: 'popularity.desc',
+                    }}
+                );
+            setContent(prev => [...prev, ...nextContent]);
+            setNextContent(res.data.results);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
-        getData();
-    }, [genres]);
+        if(!firstRender) {
+            getData(fetchPageNum);
+        }    
+
+    }, [fetchPageNum]);
+
+    useEffect(() => {
+        setContent([]);
+        setNextContent([]);
+        getStartData(1);
+
+        setFetchPageNum(2);
+        setFirstRender(false);
+
+    }, [genres])
 
     return (
         <Wrapper>
-            <GenresContext value={{genres, setGenres}}>
+            <AppContext value={{genres, setGenres, fetchPageNum, setFetchPageNum}}>
                 <SideBar category={category}/>
-                <FeaturedGrid
+                <Featured
                     items={content}
                 />
-            </GenresContext>
+            </AppContext>
         </Wrapper>
     );
 

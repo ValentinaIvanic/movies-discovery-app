@@ -21,14 +21,17 @@ export default function SideBar({category}) {
 
     useEffect(() => {
         const url = category == "movie" ? "movie/upcoming" : "tv/airing_today"
-        const getSidePoster = async () => {
-            const res = await API.get(`/${url}`)
-            const poster_data = res.data.results[0];
-            setPoster(poster_data);
-            console.log(poster_data);
+        try {
+            const getSidePoster = async () => {
+                const res = await API.get(`/${url}`)
+                const poster_data = res.data.results[0];
+                setPoster(poster_data);
+                console.log(poster_data);
+            }
+            getSidePoster();
+        } catch (err) {
+            console.log(err);
         }
-
-        getSidePoster();
     }, []);
 
     return (

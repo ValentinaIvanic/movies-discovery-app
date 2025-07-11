@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Preview from "../componets/Preview";
-import FeaturedGrid from "../componets/Featured";
+import Featured from "../componets/Featured";
 import API from "../api";
 import { useState, useEffect } from "react";
 
@@ -36,12 +36,12 @@ export default function Home() {
     }, []);
 
     return(
-        <Wrapper> 
+        <Wrapper>
             <Preview 
                 firstItem={content[0]}
                 otherItems={content.slice(1, 5)}
             />
-            <FeaturedGrid items={content}/>
+            <Featured items={content}/>
         </Wrapper>
 
     );
