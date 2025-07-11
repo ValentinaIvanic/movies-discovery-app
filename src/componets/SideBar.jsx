@@ -20,8 +20,9 @@ export default function SideBar({category}) {
     const [poster, setPoster] = useState();
 
     useEffect(() => {
+        const url = category == "movie" ? "movie/upcoming" : "tv/airing_today"
         const getSidePoster = async () => {
-            const res = await API.get(`/${category}/upcoming`)
+            const res = await API.get(`/${url}`)
             const poster_data = res.data.results[0];
             setPoster(poster_data);
             console.log(poster_data);
@@ -33,7 +34,7 @@ export default function SideBar({category}) {
     return (
         <Wrapper>
             <GenreBar category={category}/>
-            {poster && <SidePoster poster_path={poster.poster_path}/>}
+            {poster && <SidePoster category={category} poster_path={poster.poster_path}/>}
             {poster && <About overview={poster.overview} title={poster.title ? poster.title : poster.name}/>}
         </Wrapper>
     );

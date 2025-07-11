@@ -2,7 +2,10 @@ import styled from "styled-components";
 import FeaturedGrid from "../componets/Featured";
 import API from "../api";
 import SideBar from "./SideBar";
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, createContext } from "react";
+
+export const GenresContext = createContext();
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,8 +15,9 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-export default function Content({category, genres}) {
+export default function Content({category}) {
     const [content, setContent] = useState([]);
+    const [genres, setGenres] = useState([]);
 
     const getData = async () => {
         try {
@@ -35,14 +39,16 @@ export default function Content({category, genres}) {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [genres]);
 
     return (
         <Wrapper>
-            <SideBar category={category}/>
-            <FeaturedGrid
-                items={content}
-            />
+            <GenresContext value={{genres, setGenres}}>
+                <SideBar category={category}/>
+                <FeaturedGrid
+                    items={content}
+                />
+            </GenresContext>
         </Wrapper>
     );
 

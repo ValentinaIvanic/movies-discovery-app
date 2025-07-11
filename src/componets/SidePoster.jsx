@@ -27,10 +27,10 @@ const Title = styled.h4`
     padding: 2px;
 `;
 
-export default function SidePoster({poster_path}) {
+export default function SidePoster({category, poster_path}) {
     return (
         <Box image={`https://image.tmdb.org/t/p/original${poster_path}`}>
-            <Title>UPCOMING</Title>
+            <Title>{category === "movie" ? "UPCOMING" : "AIRING TODAY"}</Title>
         </Box>
     );
 

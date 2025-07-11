@@ -26,13 +26,13 @@ export default function GenreBar({category}) {
         }
 
         fetchGenres();
-    },)
+    }, [])
     
 
     return (
         <GenreList>
             {genres.map(
-                (genre) => <Genre key={genre.id} genre_name={genre.name}/>
+                (genre) => <Genre key={genre.id} id= {genre.id} genre_name={genre.name}/>
             )}
         </GenreList>
     );
