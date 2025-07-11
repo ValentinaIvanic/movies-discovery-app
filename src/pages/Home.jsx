@@ -2,7 +2,9 @@ import styled from "styled-components";
 import Preview from "../componets/Preview";
 import Featured from "../componets/Featured";
 import API from "../api";
-import { useState, useEffect } from "react";
+import { AppContext } from "../context/AppContext";
+
+import { useState, useEffect, useRef } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -13,38 +15,40 @@ const Wrapper = styled.div`
 
 export default function Home() {
     const [content, setContent] = useState([]);
+    const [fetchPageNum, setFetchPageNum] = useState(1);
+    const firstRender = useRef(true);
 
-    const getStartData = async () => {
+    const getData = async () => {
         try {
             const res = await API.get(
                     "/discover/movie", 
                     {params: { 
+                        page: fetchPageNum,
                         include_video: 'false', 
                         sort_by: 'popularity.desc',
                     }}
                 );
-            console.log(res.data.results);
-            const data = res.data.results
-            setContent(data);
+            setContent(prev => [...prev, ...res.data.results]);
         } catch (err) {
             console.log(err)
         }
     }
 
     useEffect(() => {
-        getStartData();
-    }, []);
+        if (!firstRender.current) {
+            getData();
+        } else {
+            firstRender.current = false;
+        }
+    }, [fetchPageNum]);
 
     return(
         <Wrapper>
-            <Preview 
-                firstItem={content[0]}
-                otherItems={content.slice(1, 5)}
-            />
-            <Featured items={content}/>
+            <AppContext value={{fetchPageNum, setFetchPageNum, content}}>
+                <Preview/>
+                <Featured/>
+            </AppContext>
         </Wrapper>
 
     );
-
-
 };

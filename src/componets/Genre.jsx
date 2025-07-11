@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext, useState } from "react";
 
-import { AppContext } from "./Content";
+import { AppContext } from "../context/AppContext";
 
 const GenreBox = styled.div`
     font-size = 0.5rem;
@@ -22,7 +22,7 @@ const GenreBox = styled.div`
 `;
 
 export default function Genre({id, genre_name}) {
-    const {genres, setGenres, fetchPageNum, setFetchPageNum} = useContext(AppContext);
+    const {genres, setGenres} = useContext(AppContext);
     const [active, setActive] = useState(false);
 
     const handleClick = () => {

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import FeaturedBox from "./FeaturedBox";
 import LoadMoreButton from "./LoadMoreButton";
+import { AppContext } from "../context/AppContext";
+
+import { useContext } from "react";
+
 
 const Grid = styled.div`
     display: grid;
@@ -9,11 +13,11 @@ const Grid = styled.div`
     padding: 10px 20px;
 `;
 
-export default function Featured({items}) {
-    
+export default function Featured() {
+    const {content} = useContext(AppContext)
     return (
         <Grid>
-           { items?.map((item) =>
+           { content?.map((item) =>
                 <FeaturedBox 
                     key={item.id} 
                     img_path={`https://image.tmdb.org/t/p/original${item.poster_path}`} 

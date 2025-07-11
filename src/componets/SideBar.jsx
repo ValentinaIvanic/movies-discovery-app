@@ -20,7 +20,7 @@ export default function SideBar({category}) {
     const [poster, setPoster] = useState();
 
     useEffect(() => {
-        const url = category == "movie" ? "movie/upcoming" : "tv/airing_today"
+        const url = category === "movie" ? "movie/upcoming" : "tv/airing_today"
         try {
             const getSidePoster = async () => {
                 const res = await API.get(`/${url}`)

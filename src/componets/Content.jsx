@@ -2,10 +2,10 @@ import styled from "styled-components";
 import Featured from "../componets/Featured";
 import API from "../api";
 import SideBar from "./SideBar";
+import { AppContext } from "../context/AppContext";
 
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export const AppContext = createContext({genres:[], setGenres:()=>{}, fetchPageNum:[], setFetchPageNum:()=>{}});
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,10 +19,8 @@ export default function Content({category}) {
     const [content, setContent] = useState([]);
     const [genres, setGenres] = useState([]);
     const [fetchPageNum, setFetchPageNum] = useState(1);
-    const [firstRender, setFirstRender] = useState(true);
-
     const [nextContent, setNextContent] = useState([]);
-
+    const firstRender = useRef(true);
 
     const getStartData = async (pageNum) => {
         try {
@@ -35,9 +33,7 @@ export default function Content({category}) {
                         sort_by: 'popularity.desc',
                     }}
                 );
-            console.log(res.data.results);
-            const data = res.data.results
-            setContent(data);
+            setContent(res.data.results);
         } catch (err) {
             console.log(err)
         }
@@ -62,7 +58,7 @@ export default function Content({category}) {
     }
 
     useEffect(() => {
-        if(!firstRender) {
+        if(!firstRender.current) {
             getData(fetchPageNum);
         }    
 
@@ -74,17 +70,15 @@ export default function Content({category}) {
         getStartData(1);
 
         setFetchPageNum(2);
-        setFirstRender(false);
+        firstRender.current = false;
 
     }, [genres])
 
     return (
         <Wrapper>
-            <AppContext value={{genres, setGenres, fetchPageNum, setFetchPageNum}}>
+            <AppContext value={{genres, setGenres, fetchPageNum, setFetchPageNum, content}}>
                 <SideBar category={category}/>
-                <Featured
-                    items={content}
-                />
+                <Featured/>
             </AppContext>
         </Wrapper>
     );

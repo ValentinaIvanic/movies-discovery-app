@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { AppContext } from "./Content";
+import { AppContext } from "../context/AppContext";
 
 const Button = styled.button`
     color: black;
@@ -11,7 +11,7 @@ const Button = styled.button`
 `;
 
 export default function LoadMoreButton() {
-    const {genres, setGenres, fetchPageNum, setFetchPageNum} = useContext(AppContext);
+    const {fetchPageNum, setFetchPageNum} = useContext(AppContext);
 
     return (
         <Button onClick={() => {setFetchPageNum(prev => prev + 1); console.log(fetchPageNum)}}>Load More</Button>

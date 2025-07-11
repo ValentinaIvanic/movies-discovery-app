@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useContext } from "react";
-import { RoutingContext } from "../App";
+import { RoutingContext } from "../context/RoutingContext";
 
 const StyledLink = styled.button`
     color: white;

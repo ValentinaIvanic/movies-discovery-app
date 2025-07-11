@@ -4,11 +4,9 @@ import Home from "./pages/Home";
 import TvShows from "./pages/TvShows";
 import Movies from "./pages/Movies"
 import SearchBar from "./componets/SearchBar";
+import { RoutingContext } from "./context/RoutingContext";
 
 import { useState } from "react";
-import { createContext } from "react";
-
-export const RoutingContext = createContext();
 
 const Page = styled.div`
   display: flex;
@@ -20,8 +18,10 @@ const Page = styled.div`
 
 function App() {
   const [currentPage, setCurrentPage] = useState("/home");
-  console.log(currentPage);
 
+
+
+    
   return (
     <Page>
       <SearchBar/>
@@ -32,7 +32,6 @@ function App() {
         {currentPage === "/tv_shows" && <TvShows/>}
       </RoutingContext>
     </Page>
-
   );
 }
 

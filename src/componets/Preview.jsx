@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import PreviewBox from "./PreviewBox";
+import { AppContext } from "../context/AppContext";
+import { useContext } from "react";
 
 const Wrapper = styled.div`
     display: flex;
@@ -11,15 +13,18 @@ const Wrapper = styled.div`
 const Grid = styled.div`
     display: grid;
     grid-template-columns: auto auto;
+    grid-template-rows: 50% 25% 25%;
     gap: 2rem;
 `;
 
-export default function Preview({firstItem, otherItems}) {
+export default function Preview() {
+    const {content} = useContext(AppContext);
+    const firstFive = content.slice(0, 4);
 
     return (
         <Wrapper>
             <Grid>
-                { otherItems?.map((item) =>
+                { firstFive?.map((item) =>
                         <PreviewBox
                             key={item.id}
                             backdrop_path={item.backdrop_path}
