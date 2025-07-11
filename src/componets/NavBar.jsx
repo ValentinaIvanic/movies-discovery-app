@@ -35,13 +35,15 @@ const NavLinks = styled.div`
 
 
 export default function NavBar(){
+
+
     return (
         <StyledNav>
             <Logo>MOVIES ONLINE</Logo>
             <NavLinks>
-                <NavLink href="/">Home</NavLink>
-                <NavLink href="/">Movies</NavLink>
-                <NavLink href="/">Tv-shows</NavLink>
+                <NavLink currentPage={"/home"}>Home</NavLink>
+                <NavLink currentPage={"/movies"}>Movies</NavLink>
+                <NavLink currentPage={"/tv_shows"}>Tv-shows</NavLink>
             </NavLinks>
 
         </StyledNav>

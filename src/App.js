@@ -1,15 +1,12 @@
 import NavBar from "./componets/NavBar";
 import styled from "styled-components";
-import SideBar from "./componets/SideBar";
-import ContentGrid from "./componets/ContentList";
+import Home from "./pages/Home";
+import TvShows from "./pages/TvShows";
+import Movies from "./pages/Movies"
+import SearchBar from "./componets/SearchBar";
+import { RoutingContext } from "./context/RoutingContext";
 
-const MainDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 20px;
-  height: 100%;
-`;
+import { useState } from "react";
 
 const Page = styled.div`
   display: flex;
@@ -20,15 +17,21 @@ const Page = styled.div`
 
 
 function App() {
+  const [currentPage, setCurrentPage] = useState("/home");
+
+
+
+    
   return (
     <Page>
-      <NavBar/>
-      <MainDiv>
-        <SideBar/>
-        <ContentGrid/>
-      </MainDiv>
+      <SearchBar/>
+      <RoutingContext value={{currentPage, setCurrentPage}}>
+        <NavBar/>
+        {currentPage === "/home" && <Home/>}
+        {currentPage === "/movies" && <Movies/>}
+        {currentPage === "/tv_shows" && <TvShows/>}
+      </RoutingContext>
     </Page>
-
   );
 }
 
